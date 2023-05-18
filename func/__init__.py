@@ -1,0 +1,1 @@
+from .generator import gan_melody

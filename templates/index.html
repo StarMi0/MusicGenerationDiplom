@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Gan Melody Generator</title>
+  </head>
+  <body>
+    <h1>Gan Melody Generator</h1>
+
+    <form action="/gan_music" method="post">
+      <label for="length">Length (seconds):</label>
+      <input type="number" name="length">
+
+      <label for="low-freq">Low Frequency Level:</label>
+      <input type="number" name="low_freq">
+
+      <label for="high-freq">High Frequency Level:</label>
+      <input type="number" name="high_freq">
+
+      <label for="speed">Playback Speed:</label>
+      <input type="number" name="speed">
+
+      <button type="submit">Generate</button>
+    </form>
+
+  </body>
+</html>
