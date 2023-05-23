@@ -43,7 +43,7 @@ def get_notes(path: os.PathLike) -> list:
 def data_prepare():
     print("preparing data")
     data_ = []
-
+    notes = []
     for dirName, subdirList, fileList in os.walk(data_folder):
 
         for fileName in fileList:
@@ -52,7 +52,8 @@ def data_prepare():
 
     print(f"Dataset contains {len(data_)} mid files")
 
-    notes = list(map(get_notes, data_))
+    for a in data_:
+        notes.append(get_notes(a))
 
     scaler = MinMaxScaler(feature_range=(0, 1))
     scaler.fit(np.array(notes).reshape(-1, 1))
