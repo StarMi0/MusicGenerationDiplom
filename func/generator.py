@@ -2,7 +2,7 @@ import os.path
 
 import numpy as np
 from mido import Message, MidiFile, MidiTrack
-from .functions import create_model, output_path, data_prepare
+from functions import create_model, output_path, data_prepare, weights_path
 
 
 def save_pred(prediction):
@@ -42,4 +42,5 @@ def load_trained_model(weights_path):
 
 
 if __name__ == "__main__":
-    pass
+    model = load_trained_model(weights_path)
+    save_pred(gan_melody(model))

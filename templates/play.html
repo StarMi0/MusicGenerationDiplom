@@ -1,10 +1,16 @@
+<!-- play.html -->
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Flask MIDI Player</title>
 </head>
 <body>
-
+    <h1>Flask MIDI Player</h1>
+    <audio controls>
+        <source src="{{ url_for('static', filename=filename) }}" type="audio/midi">
+        Your browser does not support the audio element.
+    </audio>
+    <br><br>
+    <a href="{{ url_for('download') }}" download>Download MIDI</a>
 </body>
 </html>
