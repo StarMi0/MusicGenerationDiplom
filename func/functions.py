@@ -4,15 +4,18 @@ import random
 import numpy as np
 from keras.layers import LSTM, Activation, Dense, Dropout
 from keras.models import Sequential
+from mido import MidiFile
 from sklearn.preprocessing import MinMaxScaler
 
 output_path = "result"
-data_folder = "data/dataset"
-len_data = 25
+data_folder = os.path.join("data", "dataset")
+len_data = 30
 n_prev = 30
+weights_path = os.path.join("data", "checkpoint_model_15.hdf5")
 
 
 def create_model():
+    print("Creating model")
     model = Sequential()
     model.add(LSTM(256, input_shape=(n_prev, 1), return_sequences=True))
     model.add(Dropout(0.6))
@@ -25,16 +28,20 @@ def create_model():
     return model
 
 
-def get_notes(data_: list) -> list:
+def get_notes(path: os.PathLike) -> list:
+    print("getting notes")
+    mid = MidiFile(path)
     notes = []
-    notes_ = list(map(get_notes, random.choices(data_, k=len_data)))
-    for i in notes_:
-        notes += i
-    print(f"Lean of dataset is: {len(notes)}")
+    for msg in mid:
+        if not msg.is_meta and msg.channel == 0 and msg.type == "note_on":
+            data = msg.bytes()
+            notes.append(data[1])
+    print(f"Data loaded with len: {len(notes)}")
     return notes
 
 
 def data_prepare():
+    print("preparing data")
     data_ = []
 
     for dirName, subdirList, fileList in os.walk(data_folder):
