@@ -19,6 +19,7 @@ def index():
         # Генерация MID файла
         model = load_trained_model("data/checkpoint_model_15.hdf5")
         save_pred(gan_melody(model))
+        
 
         # Отправка файла для проигрывания
         return render_template('play.html', filename=os.path.join(output_path, "LSTM_music.mid"))
@@ -34,4 +35,4 @@ def download():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='127.0.0.1', debug=True, port=8000)
