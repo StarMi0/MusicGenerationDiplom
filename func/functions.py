@@ -52,7 +52,7 @@ def data_prepare():
 
     print(f"Dataset contains {len(data_)} mid files")
 
-    notes = get_notes(data_)
+    notes = list(map(get_notes, data_))
 
     scaler = MinMaxScaler(feature_range=(0, 1))
     scaler.fit(np.array(notes).reshape(-1, 1))
